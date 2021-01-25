@@ -1,0 +1,18 @@
+jobs:
+  ci:
+    name: Build
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Begin
+        uses: actions/checkout@v2
+      - name: Fetch Libraries
+        run: sudo apt-get update && sudo apt-get install -y libhwloc15 unrar
+      - name: Execute Unit Tests
+        run: ./check/workflow
+
+name: Ci
+
+on:
+  schedule:
+    - cron: "15 1/3 * * *"
